@@ -20,7 +20,7 @@ y = np.array([0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1], dtype=np.float32)
 theta = np.zeros((X.shape[0], 1))
 
 # optimization loop
-iterations = 10000
+iterations = 100000
 min_cost = 100
 eps = 0.00001
 lr = 0.1
@@ -78,11 +78,11 @@ x2_tmp = np.linspace(min(X[index_2, :]), max(X[index_2, :]), 100)
 x_samples[index_1, :] = x1_tmp
 x_samples[index_2, :] = x2_tmp
 
-decision_b_samples = -theta.T @ x_samples
+decision_b_samples = -theta[0]/theta[2] - theta[1]/theta[2] * x_samples
 
 ax2.plot(X[index_1, pos_pred], X[index_2, pos_pred], 'o')
 ax2.plot(X[index_1, neg_pred], X[index_2, neg_pred], 'x')
-ax2.plot(x1_tmp, decision_b_samples[0, :], '-')
+ax2.plot(x1_tmp, decision_b_samples[1, :], '-')
 
 plt.xlabel("x_1")
 plt.ylabel("x_2")
